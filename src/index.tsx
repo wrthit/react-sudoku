@@ -12,7 +12,7 @@ ReactDOM.render(
       <Content data-cy="content">
         <Title data-cy="title">Sudoku</Title>
         <Card data-cy="card">
-          <Grid></Grid>
+          <Grid />
         </Card>
       </Content>
     </ThemeProvider>
