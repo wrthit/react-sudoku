@@ -1,8 +1,10 @@
-import React, { FC, Children } from 'react'
+import React, { FC, Children, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { Block } from './block'
+import { initCells } from '../../utils'
+import { Cell } from '../../types/cell'
 
-const Sudoku = styled.div`
+const StyledGrid = styled.div`
   ${({ theme }) => css`
     background: ${theme.colors.white};
     margin: 0.5rem;
@@ -28,20 +30,22 @@ const Sudoku = styled.div`
 `
 
 const Grid: FC = () => {
+  const [cells] = useState<Cell[][]>(initCells())
+
   return (
-    <Sudoku data-cy="grid-container">
+    <StyledGrid data-cy="grid-container">
       {Children.toArray(
-        [...Array(9)].map((_, rowIndex) => (
+        cells.map((row, rowIndex) => (
           <div data-cy="div-row-container">
             {Children.toArray(
-              [...Array(9)].map((_, colIndex) => (
-                <Block data-cy="block">5</Block>
+              row.map((cell, colIndex) => (
+                <Block data-cy="block" state={cell.state} value={cell.value} />
               ))
             )}
           </div>
         ))
       )}
-    </Sudoku>
+    </StyledGrid>
   )
 }
 

@@ -1,6 +1,16 @@
+import React from 'react'
 import styled from 'styled-components'
+import { CellState, CellValue } from '../../../types/cell'
 
-export const Block = styled.div`
+interface BlockProps {
+  // row: number
+  // col: number
+  state: CellState
+  value: CellValue
+  // onClick(rowParam: number, colParam: number): (e: React.MouseEvent) => void
+}
+
+const StyledBlock = styled.div`
   border: thin solid black;
   width: 10rem;
   text-align: center;
@@ -18,3 +28,7 @@ export const Block = styled.div`
     border-right: thick solid black;
   }
 `
+
+export const Block: React.FC<BlockProps> = ({ value }) => {
+  return <StyledBlock>{value}</StyledBlock>
+}
